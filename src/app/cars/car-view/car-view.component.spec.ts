@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { CarViewComponent } from './car-view.component';
 
 describe('CarViewComponent', () => {

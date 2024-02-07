@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CarDeleteService } from './car-delete.service';
-import { CarDataService } from '../shared/car-data-service';
 
 @Component({
   selector: 'car-delete',
@@ -15,7 +14,7 @@ export class CarDeleteComponent implements OnInit{
   errorMessage : string | null = null;
   isDeleted : boolean = false;
 
-  constructor(private carDeleteService : CarDeleteService,private carDataService: CarDataService ){}
+  constructor(private carDeleteService : CarDeleteService ){}
 
   ngOnInit(): void {
   }
@@ -26,11 +25,11 @@ export class CarDeleteComponent implements OnInit{
         next: () => {
             this.status = 'Delete successful';
             this.isDeleted = true;
-            this.carDataService.emitDeleteSuccess(this.carId);
+            window.location.reload();
         },
         error: error => {
-            this.errorMessage = error.message;
-            console.error('There was an error!', error);
+          this.status = 'Delete unsuccessful';
+          console.error('There was an error!', error);
         }
     });
   }

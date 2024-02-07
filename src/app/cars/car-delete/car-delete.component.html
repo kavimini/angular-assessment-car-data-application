@@ -7,8 +7,7 @@
                 <button class="delete-button" (click)="confirmDelete()">Delete</button>
                 <button class="close-button" (click)="closeDialogDelete()">Close</button>
             </div>
-            <div *ngIf="isDeleted"><p>{{ status }}</p></div>
-            <div *ngIf="!isDeleted"><p>{{ errorMessage }}</p></div>
+            <div *ngIf="!isDeleted"><p>{{ status }}</p></div>
         </div>
     </div>
 </div>

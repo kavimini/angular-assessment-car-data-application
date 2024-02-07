@@ -5,23 +5,23 @@
         <form  #carForm="ngForm">
           <div>
             <label for="manufacturer">Manufacturer:</label>
-            <input type="text" id="manufacturer" name="manufacturer" [(ngModel)]="carDetails.manufacturer" required>
+            <input type="text" id="manufacturer" name="manufacturer"[ngModel]="carDetails?.manufacturer" (ngModelChange)="carDetails ? carDetails.manufacturer = $event : null" required>
           </div>
           <div>
             <label for="model">Model:</label>
-            <input type="text" id="model" name="model" [(ngModel)]="carDetails.model" required>
+            <input type="text" id="model" name="model" [ngModel]="carDetails?.model" (ngModelChange)="carDetails ? carDetails.model = $event : null" required>
           </div>
           <div>
             <label for="year">Year:</label>
-            <input type="number" id="year" name="year" [(ngModel)]="carDetails.year" required>
+            <input type="number" id="year" name="year" [ngModel]="carDetails?.year" (ngModelChange)="carDetails ? carDetails.year = $event : null" required>
           </div>
           <div>
             <label for="color">Color:</label>
-            <input type="text" id="color" name="color" [(ngModel)]="carDetails.color" required>
+            <input type="text" id="color" name="color" [ngModel]="carDetails?.color" (ngModelChange)="carDetails ? carDetails.color = $event : null" required>
           </div>
           <div>
             <label for="registrationNumber">Registration Number:</label>
-            <input type="text" id="registrationNumber" name="registrationNumber" [(ngModel)]="carDetails.registration_number" required>
+            <input type="text" id="registrationNumber" name="registrationNumber" [ngModel]="carDetails?.registration_number" (ngModelChange)="carDetails ? carDetails.registration_number = $event : null" required>
           </div>
           <button type="submit" (click)="submitForm()">Submit</button>
         </form>

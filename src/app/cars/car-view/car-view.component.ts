@@ -1,35 +1,27 @@
-import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { CarViewService } from './car-view.service';
 import { Cars } from '../data/cars';
-import { CarDataService } from '../shared/car-data-service';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'car-view',
   templateUrl: './car-view.component.html'
 })
-export class CarViewComponent implements OnInit, OnChanges, OnDestroy  {
+export class CarViewComponent implements OnInit, OnChanges  {
   @Input() carId: number | null = null;
   @Input() isVisible: boolean = false;
   @Output() closeDialog = new EventEmitter<void>();
 
   carDetails: Cars | null = null;
   initialized: boolean = false;
-  carUpdateSubscription: Subscription = new Subscription();
 
-  constructor(private carViewService: CarViewService, private carDataService: CarDataService) {}
+  constructor(private carViewService: CarViewService) {}
 
   ngOnInit(): void {
-    //check initialization to prevent http request from triggering before carId is available
     this.initialized = true; 
-    this.carUpdateSubscription = this.carDataService.getUpdatedCar().subscribe(updatedCar => {
-      if (this.initialized && updatedCar.id === this.carDetails?.id) {
-        this.carDetails = updatedCar;
-      }
-    });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    //check component initialization before processing carId changes
     if (this.initialized) {
       const carIdChange = changes['carId'];
       if (carIdChange && this.carId !== null) {
@@ -42,7 +34,6 @@ export class CarViewComponent implements OnInit, OnChanges, OnDestroy  {
     this.carViewService.getCarDetails(this.carId).subscribe(
       (data: Cars) => {
         this.carDetails = data;
-        console.log(this.carDetails);
       }
     );
   }
@@ -51,7 +42,4 @@ export class CarViewComponent implements OnInit, OnChanges, OnDestroy  {
     this.closeDialog.emit();
   }
 
-  ngOnDestroy(): void {
-    this.carUpdateSubscription.unsubscribe();
-  }
 }
