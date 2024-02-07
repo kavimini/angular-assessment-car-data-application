@@ -1,0 +1,34 @@
+<h2>Car Data</h2>
+<table>
+    <thead>
+      <tr>
+        <th>Car ID</th>
+        <th>Manufacturer</th>
+        <th>Model</th>
+        <th>Year</th>
+        <th>Color</th>
+        <th>Registration Number</th>
+        <th>View-Update-Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of cars">
+        <td>{{ item.id }}</td>
+        <td>{{ item.manufacturer }}</td>
+        <td>{{ item.model }}</td>
+        <td>{{ item.year }}</td>
+        <td>{{ item.color }}</td>
+        <td>{{ item.registration_number}}</td>
+        <td>
+          <button (click)="showCarDetails(item.id)">View</button>
+          <button (click)="updateCar(item.id)">Update</button>
+          <button (click)="deleteCar(item.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <car-view [carId]="carId" [isVisible]="isCarView" (closeDialog)="closeDialog()"></car-view>
+  <car-update [carId]="carId" [isVisible]="isCarUpdate" (closeDialog)="closeUpdateDialog()"></car-update>
+  <car-delete [carId]="carId" [isVisible]="isCarDelete" (closeDialog)="closeDeleteDialog()"></car-delete>
+

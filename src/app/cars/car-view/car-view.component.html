@@ -1,0 +1,17 @@
+<div class="modal-overlay" *ngIf="isVisible">
+    <div class="modal">
+      <div class="modal-content">
+        <h2>Car Details</h2>
+        <div *ngIf="carDetails">
+        <p>Car Id: {{ carDetails.id }}</p>
+        <p>Manufacturer: {{ carDetails.manufacturer }}</p>
+        <p>Model: {{ carDetails.model }}</p>
+        <p>Year: {{ carDetails.year }}</p>
+        <p>Color: {{ carDetails.color }}</p>
+        <p>Registration Number: {{ carDetails.registration_number }}</p>
+      </div>
+      <button (click)="closeDialogView()">Close</button>
+    </div>
+    </div>
+  </div>
+  
